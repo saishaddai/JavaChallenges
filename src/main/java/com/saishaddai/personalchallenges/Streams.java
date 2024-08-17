@@ -1,11 +1,14 @@
 package com.saishaddai.personalchallenges;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import com.saishaddai.Item;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Streams {
+
+    public static final Double maxPrice = 1000.0;
+    public static final Double minPrice = 0.0;
 
     private final List<Integer> numbers;
     public Streams() {
@@ -19,4 +22,35 @@ public class Streams {
                 .collect(Collectors.toList());
 
     }
+
+
+    public Double getMaxPrice(List<Item> cart) {
+        Optional<Item> result = cart.stream()
+                .max(Comparator.comparingDouble(Item::getPrice));
+        if (result.isPresent()) {
+            return result.get().getPrice();
+        }
+        return maxPrice;
+    }
+
+    public Double getMinPrice(List<Item> cart) {
+        Optional<Item> result = cart.stream()
+                .min(Comparator.comparingDouble(Item::getPrice));
+        if (result.isPresent()) {
+            return result.get().getPrice();
+        }
+        return minPrice;
+    }
+
+    public List<Item> getListWithoutMaxAndMinPrices(List<Item> cart) {
+        Double maxPrice = getMaxPrice(cart);
+        Double minPrice = getMinPrice(cart);
+
+        return cart.stream()
+                .filter(item -> !Objects.equals(item.getPrice(), maxPrice))
+                .filter(item -> !Objects.equals(item.getPrice(), minPrice))
+                .collect(Collectors.toList());
+
+    }
+
 }
