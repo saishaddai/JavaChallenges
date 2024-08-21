@@ -12,7 +12,7 @@ class SqueakyCleanTest {
     @Tag("task:1")
     @DisplayName("kebab testing")
     public void kebab() {
-        assertEquals(SqueakyClean.kebabToCamel2("a-bc"), "aBc");
+        assertEquals(SqueakyClean.kebabToCamelCase("a-bc"), "aBc");
     }
 
 
