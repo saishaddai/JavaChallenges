@@ -15,11 +15,38 @@ public class SqueakyClean {
 
     private static String leetspeakBlankSpaces(String identifier) {
         return identifier.chars()
-                .map(c -> c == ' ' ? '_' : (char) c)//task 1
-                .map(c -> c == '0' ? 'o' : c == '1' ? 'l' : c == '3' ? 'e' : c == '4' ? 'a' : c == '7' ? 't' : (char) c)//task 3
+                .map(SqueakyClean::transformBlanks)//task 1
+                .map(SqueakyClean::transformLeetspeak)//task 3
                 .mapToObj(c -> (char) c)
                 .map(String::valueOf)
                 .collect(Collectors.joining());
+    }
+
+    private static char transformBlanks(int c) {
+        return c == ' ' ? '_' : (char) c;
+    }
+
+    private static char transformLeetspeak(int c) {
+        char result;
+        switch(c) {
+            case '0':
+                result = 'o';
+                break;
+            case '1':
+                result = 'l';
+                break;
+            case '3':
+                result = 'e';
+                break;
+            case '4':
+                result = 'a';
+                break;
+            case '7':
+                result = 't';
+                break;
+            default: result = (char) c;
+        }
+        return result;
     }
 
 
