@@ -9,16 +9,17 @@ public class SqueakyClean {
         if (identifier.isEmpty()) {
             return "";
         } else {
-            return removeSymbols(leetspeakBlankSpaces(kebabToCamelCase(identifier)));
+            return cleanInStream(kebabToCamelCase(identifier));
         }
     }
 
-    private static String leetspeakBlankSpaces(String identifier) {
+    private static String cleanInStream(String identifier) {
         return identifier.chars()
                 .map(SqueakyClean::transformBlanks)//task 1
                 .map(SqueakyClean::transformLeetspeak)//task 3
                 .mapToObj(c -> (char) c)
                 .map(String::valueOf)
+                .map(SqueakyClean::removeSymbols)//task 4
                 .collect(Collectors.joining());
     }
 
