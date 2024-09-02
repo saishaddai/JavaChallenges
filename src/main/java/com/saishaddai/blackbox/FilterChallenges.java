@@ -1,6 +1,7 @@
 package com.saishaddai.blackbox;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -32,6 +33,16 @@ public class FilterChallenges {
     }
 
     /**
+     * Exercise: Find the longest word in a list of strings
+     */
+    public String findLongestWord(List<String> words) {
+        return words.stream()
+                .reduce((lastWord, currentWord) -> lastWord.length() > currentWord.length() ? lastWord : currentWord)
+                .orElse("");
+
+    }
+
+    /**
      * Exercise: calculate the factorial of a number using reduce
      */
     public int calculateFactorial(int position) {
@@ -44,6 +55,45 @@ public class FilterChallenges {
                 .reduce((a,b) -> a * b);
 
         return result.orElse(0);
+    }
+
+    private static final String VOWELS = "aeiou";
+    /**
+     * Remove Vowels of any given string
+     */
+    public String removeVowels(String input) {
+        return input.chars()
+                .filter(character -> !VOWELS.contains(String.valueOf((char) character).toLowerCase()))
+                .mapToObj(c -> (char) c)
+                .map(String::valueOf)
+                .collect(Collectors.joining());
+    }
+
+    /**
+     * sum even numbers from a list of integers
+     */
+    public int sumEvenNumbers(List<Integer> numbers) {
+        return numbers.stream()
+                .filter(number -> number % 2 == 0)
+                .mapToInt(Integer::valueOf)
+                .sum();
+    }
+
+
+    /**
+     * Copy from Kotlin Challenges
+     * Write a Java function that takes a map of strings to integers as an
+     * input and returns a new map with only the entries where the value is
+     * greater than 10.
+     * Input: {"a" to 5, "b" to 15, "c" to 20, "d" to 5}
+     * Output: {"b" to 15, "c" to 20}
+     */
+    public Map<String, Integer> filterMap(Map<String, Integer> input) {
+        return input.keySet()
+                .stream()
+                .filter(key -> input.get(key) > 10)
+                .collect(Collectors.toMap(String::valueOf, input::get));
+
     }
 
 
