@@ -100,8 +100,6 @@ public class FilterChallenges {
         return  input.values()
                 .stream()
                 .flatMap(List::stream)
-                .collect(Collectors.toList())
-                .stream()
                 .min(Integer::compareTo)
                 .orElse(0);
     }
