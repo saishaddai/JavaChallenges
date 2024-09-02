@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -78,9 +79,31 @@ class FilterChallengesTest {
     }
 
 
+    @Test
+    @Tag("task:3")
+    @DisplayName("find Longest Word of an empty list must return an empty string")
+    void findLongestWord_emptyList() {
+        FilterChallenges ft = new FilterChallenges();
+        List<String> words = List.of();
+        var result = ft.findLongestWord(words);
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+    }
 
     @Test
     @Tag("task:3")
+    @DisplayName("find Longest Word of a valid list must return longest string")
+    void findLongestWord_Valid() {
+        FilterChallenges ft = new FilterChallenges();
+        String expected = "lost+found";
+        var words = List.of("word", "place", expected, "always" );
+        var result = ft.findLongestWord(words);
+        assertEquals(expected, result);
+    }
+
+
+    @Test
+    @Tag("task:4")
     @DisplayName("calculate factorial of zero return 1")
     void calculateFactorial_zeroAsInput() {
         FilterChallenges ft = new FilterChallenges();
@@ -89,7 +112,7 @@ class FilterChallengesTest {
     }
 
     @Test
-    @Tag("task:3")
+    @Tag("task:4")
     @DisplayName("calculate factorial of a couple of numbers")
     void calculateFactorial_Valid() {
         FilterChallenges ft = new FilterChallenges();
@@ -98,5 +121,115 @@ class FilterChallengesTest {
     }
 
 
+    @Test
+    @Tag("task:5")
+    @DisplayName("removeVowels from an empty string must return empty string")
+    void removeVowels_Empty() {
+        FilterChallenges ft = new FilterChallenges();
+        var result = ft.removeVowels("");
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    @Tag("task:5")
+    @DisplayName("removeVowels from an string with no vowels must return input")
+    void removeVowels_NoVowels() {
+        FilterChallenges ft = new FilterChallenges();
+        var input = "sdfghjk";
+        var result = ft.removeVowels(input);
+        assertNotNull(result);
+        assertEquals(input, result);
+    }
+
+    @Test
+    @Tag("task:5")
+    @DisplayName("removeVowels from a valid string must return string without vowels")
+    void removeVowels_valid() {
+        FilterChallenges ft = new FilterChallenges();
+        var input = "Elvis Presley LivEs";
+        var result = ft.removeVowels(input);
+        assertNotNull(result);
+        assertEquals("lvs Prsly Lvs", result);
+    }
+
+
+    @Test
+    @Tag("task:6")
+    @DisplayName("sumEvenNumbers from an empty list must return zero")
+    void sumEvenNumbers_emptyList() {
+        FilterChallenges ft = new FilterChallenges();
+        List<Integer> input = List.of();
+        var result = ft.sumEvenNumbers(input);
+        assertEquals(0, result);
+    }
+
+    @Test
+    @Tag("task:6")
+    @DisplayName("sumEvenNumbers from a list with no even numbers must return zero")
+    void sumEvenNumbers_noEvens() {
+        FilterChallenges ft = new FilterChallenges();
+        List<Integer> input = List.of(1, 3, 5, 7, 9);
+        var result = ft.sumEvenNumbers(input);
+        assertEquals(0, result);
+    }
+
+    @Test
+    @Tag("task:6")
+    @DisplayName("sumEvenNumbers from a valid list must return the right sum")
+    void sumEvenNumbers_valid() {
+        FilterChallenges ft = new FilterChallenges();
+        List<Integer> input = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9);
+        var result = ft.sumEvenNumbers(input);
+        assertEquals(20, result);
+    }
+
+
+
+    @Test
+    @Tag("task:7")
+    @DisplayName("filter an empty map returns empty map")
+    void filterMap_empty() {
+        FilterChallenges ft = new FilterChallenges();
+        var result  = ft.filterMap(Map.of());
+        assertNotNull(result);
+        assertEquals(Map.of(), result);
+    }
+
+    @Test
+    @Tag("task:7")
+    @DisplayName("filter map with nothing to filter returns empty map")
+    void filterMap_noFilter() {
+        FilterChallenges ft = new FilterChallenges();
+        var input = Map.of(
+                "dog", 3,
+                "really", 6,
+                "another", 9
+        );
+        var result = ft.filterMap(input);
+        assertEquals(Map.of(), result);
+    }
+
+    @Test
+    @Tag("task:7")
+    @DisplayName("filter Map with valid and filterable map return filtered map")
+    void filterMap_valid() {
+        var ft = new FilterChallenges();
+        var validKey1 = "KEY1";
+        var validKey2 = "KEY2";
+        var input = Map.of(
+                "dog", 5,
+                validKey1, 18,
+                "really", 6,
+                validKey2, 11,
+                "another", 9
+        );
+        var result= ft.filterMap(input);
+        assertNotNull(result);
+        assertEquals(2, result.size());
+        assertTrue(result.containsKey(validKey1));
+        assertTrue(result.containsKey(validKey2));
+
+    }
 
 }
