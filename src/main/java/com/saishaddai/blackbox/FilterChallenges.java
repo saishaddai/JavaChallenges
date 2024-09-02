@@ -96,5 +96,15 @@ public class FilterChallenges {
 
     }
 
+    public int getMin(Map<String, List<Integer>> input) {
+        return  input.values()
+                .stream()
+                .flatMap(List::stream)
+                .collect(Collectors.toList())
+                .stream()
+                .min(Integer::compareTo)
+                .orElse(0);
+    }
+
 
 }

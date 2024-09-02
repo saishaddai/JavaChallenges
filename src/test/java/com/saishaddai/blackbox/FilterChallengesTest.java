@@ -224,12 +224,39 @@ class FilterChallengesTest {
                 validKey2, 11,
                 "another", 9
         );
-        var result= ft.filterMap(input);
+        var result = ft.filterMap(input);
         assertNotNull(result);
         assertEquals(2, result.size());
         assertTrue(result.containsKey(validKey1));
         assertTrue(result.containsKey(validKey2));
-
     }
+
+
+
+    @Test
+    @Tag("task:8")
+    @DisplayName("filter Map and the min of an empty list of lists of integers returns zero")
+    void getMin_empty() {
+        var ft = new FilterChallenges();
+        Map<String, List<Integer>> input = Map.of();
+        var result= ft.getMin(input);
+        assertEquals(0, result);
+    }
+
+
+    @Test
+    @Tag("task:8")
+    @DisplayName("filter Map and the min of a valid list of lists of integers returns min")
+    void getMin_valid() {
+        var ft = new FilterChallenges();
+        var input = Map.of(
+                "dog", List.of(1, 2, 3, 4, 6),
+                "hello", List.of(5, -6, 7, 8, 9),
+                "really", List.of(4, 7, 33, 56)
+        );
+        var result= ft.getMin(input);
+        assertEquals(-6, result);
+    }
+
 
 }
