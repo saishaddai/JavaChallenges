@@ -79,4 +79,24 @@ class FilterChallengesTest {
 
 
 
+    @Test
+    @Tag("task:3")
+    @DisplayName("calculate factorial of zero return 1")
+    void calculateFactorial_zeroAsInput() {
+        FilterChallenges ft = new FilterChallenges();
+        var result = ft.calculateFactorial(0);
+        assertEquals(1, result);
+    }
+
+    @Test
+    @Tag("task:3")
+    @DisplayName("calculate factorial of a couple of numbers")
+    void calculateFactorial_Valid() {
+        FilterChallenges ft = new FilterChallenges();
+        var result = ft.calculateFactorial(5);
+        assertEquals(120, result);
+    }
+
+
+
 }

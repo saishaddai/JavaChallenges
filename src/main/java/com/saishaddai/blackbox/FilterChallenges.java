@@ -1,7 +1,9 @@
 package com.saishaddai.blackbox;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class FilterChallenges {
 
@@ -27,6 +29,21 @@ public class FilterChallenges {
         return cart.stream()
                 .mapToDouble(Item::getPrice)
                 .sum();
+    }
+
+    /**
+     * Exercise: calculate the factorial of a number using reduce
+     */
+    public int calculateFactorial(int position) {
+        if(position == 0) return 1;
+        List<Integer> list = IntStream.rangeClosed(1, position)
+                .boxed()
+                .collect(Collectors.toList());
+
+        Optional<Integer> result = list.stream()
+                .reduce((a,b) -> a * b);
+
+        return result.orElse(0);
     }
 
 
