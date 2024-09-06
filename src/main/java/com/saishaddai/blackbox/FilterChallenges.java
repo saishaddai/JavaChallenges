@@ -104,5 +104,35 @@ public class FilterChallenges {
                 .orElse(0);
     }
 
+    /**
+     * Challenge: Write a function isValidParentheses that takes a
+     * string of parentheses as input and returns true if the parentheses are balanced and false otherwise.
+     * Constraints:
+     * The input string only contains parentheses characters ( and ).
+     * The input string is not null or empty.
+     */
+    public boolean isValidParentheses(String input) {
+        final int[] count = new int[1];
+        final boolean[] isValid = new boolean[1];
+        input.chars().forEach(character -> {
+            switch ((char) character) {
+                case '(':
+                    count[0]++;
+                    isValid[0] = true;
+                    break;
+                case ')':
+                    if (count[0] == 0) {
+                        isValid[0] = false;
+                    } else {
+                        count[0]--;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        });
+        return isValid[0] && count[0] == 0;
+    }
+
 
 }

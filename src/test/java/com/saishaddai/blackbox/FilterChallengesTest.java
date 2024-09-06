@@ -259,4 +259,18 @@ class FilterChallengesTest {
     }
 
 
+    @Test
+    @Tag("task:9")
+    @DisplayName("check if we do have balanced parentheses returns true or false in scenarios")
+    void validParentheses_valid() {
+        var ft = new FilterChallenges();
+        assertTrue(ft.isValidParentheses("()"));
+        assertTrue(ft.isValidParentheses("()()"));
+        assertTrue(ft.isValidParentheses("(())"));
+        assertFalse(ft.isValidParentheses(")("));
+        assertFalse(ft.isValidParentheses("((("));
+        assertFalse(ft.isValidParentheses(")()("));
+    }
+
+
 }
