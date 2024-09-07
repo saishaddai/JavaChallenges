@@ -3,6 +3,8 @@ package com.saishaddai.blackbox;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -112,26 +114,26 @@ public class FilterChallenges {
      * The input string is not null or empty.
      */
     public boolean isValidParentheses(String input) {
-        final int[] count = new int[1];
-        final boolean[] isValid = new boolean[1];
+        AtomicInteger count = new AtomicInteger(0);
+        AtomicBoolean isOpenParentheses = new AtomicBoolean();
         input.chars().forEach(character -> {
             switch ((char) character) {
                 case '(':
-                    count[0]++;
-                    isValid[0] = true;
+                    count.addAndGet(1);
+                    isOpenParentheses.getAndSet(true);
                     break;
                 case ')':
-                    if (count[0] == 0) {
-                        isValid[0] = false;
+                    if (count.get() == 0) {
+                        isOpenParentheses.getAndSet(false);
                     } else {
-                        count[0]--;
+                        count.addAndGet(-1);
                     }
                     break;
                 default:
                     break;
             }
         });
-        return isValid[0] && count[0] == 0;
+        return isOpenParentheses.get() && count.get() == 0;
     }
 
 
