@@ -1,8 +1,6 @@
 package com.saishaddai.blackbox;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
@@ -59,14 +57,15 @@ public class FilterChallenges {
         return result.orElse(0);
     }
 
-    private static final String VOWELS = "aeiou";
+    private static final Set<Character> VOWELS = new HashSet<>(Arrays.asList('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'));
     /**
      * Remove Vowels of any given string
      */
-    public String removeVowels(String input) {
+    public String removeVowels(String input) throws NullPointerException {
+        if (input == null) throw new NullPointerException();
         return input.chars()
-                .filter(character -> !VOWELS.contains(String.valueOf((char) character).toLowerCase()))
-                .mapToObj(c -> (char) c)
+                .mapToObj(c -> (char) c) // cast to char
+                .filter(character -> !VOWELS.contains(character))
                 .map(String::valueOf)
                 .collect(Collectors.joining());
     }
